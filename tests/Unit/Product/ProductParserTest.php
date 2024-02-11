@@ -28,7 +28,7 @@ class ProductParserTest extends TestCase
             <photo_url>http://example.com/product.jpg</photo_url>
         </product>
     ');
-        $product = $this->productService->createProductFromXml($xmlString);
+        $product = $this->productService->createOrUpdateProductFromXml($xmlString);
 
         $this->assertInstanceOf(Product::class, $product);
         $this->assertEquals(1, $product->id);

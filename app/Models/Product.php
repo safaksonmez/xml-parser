@@ -21,13 +21,15 @@ class Product extends Model
 
     public static function fromXml($productXml)
     {
-        return new self([
-            'id' => (int) $productXml->id,
-            'name' => (string) $productXml->name,
-            'description' => (string) $productXml->description,
-            'price' => (float) $productXml->price,
-            'quantity' => (int) $productXml->quantity,
-            'photo_url' => (string) $productXml->photo_url,
-        ]);
+        return self::updateOrCreate(
+            ['id' => (int) $productXml->id],
+            [
+                'name' => (string) $productXml->name,
+                'description' => (string) $productXml->description,
+                'price' => (float) $productXml->price,
+                'quantity' => (int) $productXml->quantity,
+                'photo_url' => (string) $productXml->photo_url,
+            ]
+        );
     }
 }

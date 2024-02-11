@@ -6,7 +6,7 @@ use App\Models\Product;
 
 class ProductCreator
 {
-    public function createProductFromXml($productXml)
+    public function createOrUpdateProductFromXml($productXml)
     {
         return Product::fromXml($productXml);
     }
