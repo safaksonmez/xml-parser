@@ -17,6 +17,9 @@ To run this project, you'll need the following software and tools:
 ### Installation
 
 1. Clone the project to your computer:
+    ```
+    git clone https://github.com/safaksonmez/xml-parser
+    ```
 2. Install the project dependencies by running the following command in the project's root directory:
     ```
     composer install
