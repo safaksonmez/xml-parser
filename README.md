@@ -81,5 +81,6 @@ php artisan serve
 #Example of xml data can be found at storage/app/mock.xml and storage/app/mock2.xml
 
 ```
-
+https://github.com/safaksonmez/xml-parser/blob/main/storage/app/mock.xml
+https://github.com/safaksonmez/xml-parser/blob/main/storage/app/mock2.xml
 ```
