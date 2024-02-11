@@ -12,6 +12,6 @@ class ProductDeleter
         if (!$product) {
             return;
         }
-        return $product->first()->delete();
+        return $product->each->delete();
     }
 }
