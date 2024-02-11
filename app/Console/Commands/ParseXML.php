@@ -6,9 +6,7 @@ use App\Services\Product\ProductCreator;
 use App\Services\Xml\XmlParser;
 use Illuminate\Console\Command;
 use GuzzleHttp\Client;
-use Illuminate\Support\Env;
-use Illuminate\Support\Facades\Storage;
-use League\CommonMark\Environment\Environment;
+use Illuminate\Support\Facades\Log;
 
 class ParseXML extends Command
 {
@@ -61,14 +59,23 @@ class ParseXML extends Command
      */
     public function handle()
     {
-        $client = new Client();
-        $response = $client->get(config('xml.url'));
+        $this->info('XmlParser executing...');
+        Log::info('XmlParser executing...');
+        try {
+            $client = new Client();
+            $response = $client->get(config('xml.url'));
 
-        $contents = $response->getBody()->getContents();
-        $xml = $this->xmlService->parse($contents);
-        foreach ($xml->product as $productXml) {
-            $this->productCreator->createOrUpdateProductFromXml($productXml);
+            $contents = $response->getBody()->getContents();
+            $xml = $this->xmlService->parse($contents);
+
+            foreach ($xml->product as $productXml) {
+                $this->productCreator->createOrUpdateProductFromXml($productXml);
+            }
+            Log::info('XmlParser executed successfully.');
+            $this->info('XmlParser executed successfully.');
+        } catch (\Exception $e) {
+            Log::error('An error occurred during execution of XmlParser: ' . $e->getMessage());
+            $this->error('An error occurred during execution of XmlParser.');
         }
-        return 0;
     }
 }
