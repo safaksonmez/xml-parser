@@ -2,6 +2,8 @@
 
 namespace App\Console\Commands;
 
+use App\Services\Product\ProductCreator;
+use App\Services\Xml\XmlParser;
 use Illuminate\Console\Command;
 use GuzzleHttp\Client;
 use Illuminate\Support\Env;
@@ -25,13 +27,31 @@ class ParseXML extends Command
     protected $description = 'To parse the XML file and store the data in the database.';
 
     /**
+     * Undocumented variable
+     *
+     * @var ProductCreator
+     */
+    protected $productCreator;
+
+    /**
+     * Undocumented variable
+     *
+     * @var XmlParser
+     */
+    protected $xmlService;
+
+    /**
      * Create a new command instance.
      *
      * @return void
      */
-    public function __construct()
+
+
+    public function __construct(ProductCreator $productCreator, XmlParser $xmlService)
     {
         parent::__construct();
+        $this->productCreator = $productCreator;
+        $this->xmlService = $xmlService;
     }
 
     /**
@@ -45,8 +65,10 @@ class ParseXML extends Command
         $response = $client->get(config('xml.url'));
 
         $contents = $response->getBody()->getContents();
-        $xml = simplexml_load_string($contents);
-
+        $xml = $this->xmlService->parse($contents);
+        foreach ($xml->product as $productXml) {
+            $this->productCreator->createOrUpdateProductFromXml($productXml);
+        }
         return 0;
     }
 }
