@@ -20,3 +20,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('/mock1.xml', 'XmlController@mock1');
 Route::get('/mock2.xml', 'XmlController@mock2');
+
+Route::get('/products', 'ProductController@index');
+Route::get('/products/id', 'ProductController@show');
+Route::post('/products', 'ProductController@store');
+Route::put('/products/id', 'ProductController@update');
+Route::delete('/products/id', 'ProductController@delete');

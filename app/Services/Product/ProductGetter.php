@@ -10,4 +10,9 @@ class ProductGetter
     {
         return Product::find($id);
     }
+
+    public function getProducts()
+    {
+        return Product::all();
+    }
 }
