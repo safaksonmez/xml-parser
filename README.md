@@ -78,7 +78,7 @@ php artisan serve
     - updated_at
     - deleted_at
 
-#Example of xml data can be found at storage/app/mock1.xml and storage/app/mock2.xml
+#Example of xml data can be found at storage/app/mock.xml and storage/app/mock2.xml
 
 ```
 
