@@ -63,3 +63,23 @@ php artisan serve
     ```
     http://localhost:8000/products/{id}
     ```
+
+## Database Schema
+
+### Product Table
+
+    - id
+    - name
+    - description
+    - price
+    - currency
+    - image_url
+    - created_at
+    - updated_at
+    - deleted_at
+
+#Example of xml data can be found at storage/app/mock1.xml and storage/app/mock2.xml
+
+```
+
+```
